@@ -27,6 +27,21 @@ app.get('/inventory/', (req, res) => {
 	});
 });
 
+app.post('/inventory/update', (req, res) => {
+	console.log(req.body);
+	//Yes, I've been spelling "quantity" wrong this whole time
+	for(let i = 0; i < Object.keys(req.body).length; i++){
+		const sql = 'UPDATE inventory SET quanity = quanity - 1 WHERE id=?';
+		db.run(sql, req.body.id[0], (err) => {
+			if(err){
+				return console.log(err.message);
+			}
+			console.log("Inventory item updated");
+		});
+	}
+
+});
+
 app.listen(port, () => {
 	console.log(`App listening on port ${port}`);
 });

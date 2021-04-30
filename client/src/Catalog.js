@@ -27,10 +27,24 @@ class Catalog extends Component {
 	}
 
 	checkout = () => {
+		console.log(this.state.cart)
 		let itemString = "";
 		let total = 0;
 
 		for(let i = 0; i < this.state.cart.length; i++){
+
+			let id = this.state.cart[i].id;
+			console.log(id);
+			fetch('http://localhost:4000/inventory/update', {
+				method: 'post',
+				headers: {
+	      			'Content-Type': 'application/json'
+	      		},
+				body: {
+					"id": id
+				}
+			});
+
 			itemString += this.state.cart[i].item_name + ", ";
 			total += this.state.cart[i].price;
 		}
@@ -47,10 +61,12 @@ class Catalog extends Component {
       			'Content-Type': 'application/json'
       		},
 			body: JSON.stringify(order)
-		})
+		});
+
+		
 
 		alert("Order Successful!\nItems: " + itemString + "\nTotal: " + total);
-		window.location.replace('http://localhost:3000');
+		//window.location.replace('http://localhost:3000');
 	}
 
     render() {
