@@ -66,7 +66,7 @@ class Catalog extends Component {
 		
 
 		alert("Order Successful!\nItems: " + itemString + "\nTotal: " + total);
-		//window.location.replace('http://localhost:3000');
+		window.location.replace('http://localhost:3000');
 	}
 
     render() {
