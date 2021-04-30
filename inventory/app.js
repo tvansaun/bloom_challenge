@@ -5,9 +5,18 @@ const sqlite3 = require('sqlite3');
 
 const port = 4000;
 
-app.use(cors({
-	origin: 'http://localhost:3000'
-}));
+const whitelist = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 
 let db = new sqlite3.Database('./data/inventory.sqlite3', (err) => {
 	if(err){
