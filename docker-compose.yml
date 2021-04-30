@@ -1,0 +1,22 @@
+services:
+  inventory:
+    container_name: inventory
+    restart: always
+    build: ./inventory
+    ports:
+      - "4000:4000"
+  order:
+    container_name: order
+    restart: always
+    build: ./order
+    ports:
+      - "4001:4001"
+  client:
+    container_name: client
+    restart: always
+    build: ./client
+    ports:
+      - "3000:3000"
+    links:
+      - inventory
+      - order

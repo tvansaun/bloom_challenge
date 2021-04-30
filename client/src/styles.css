@@ -1,0 +1,11 @@
+.card {
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 25px;
+	overflow: auto;
+}
+
+.card-title {
+	margin-top: 10px;
+	margin-left: 20px;
+}
